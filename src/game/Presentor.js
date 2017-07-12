@@ -1,4 +1,4 @@
-import { Container, loaders, Sprite } from 'pixi.js';
+import { Container, loaders, Sprite, Graphics } from 'pixi.js';
 import { Terain } from './constants';
 import seaTexture from '@/assets/white-hex.png';
 
@@ -25,6 +25,12 @@ class Presentor {
 
         this.boardPresentWidth = this.gameState.board.width * 60;
         this.boardPresentHeight = this.gameState.board.width * 70 + 35;
+        
+        const bgSprite = new Graphics();
+        bgSprite.beginFill(0xFF00);
+        bgSprite.alpha = 0;
+        bgSprite.drawRect(-this.boardPresentWidth / 2, -this.boardPresentHeight / 2, this.boardPresentWidth * 2, this.boardPresentHeight * 2);
+        this.board.addChild(bgSprite);
 
         this.gameState.board.terain.forEach((v, index) => {
             let hex;
