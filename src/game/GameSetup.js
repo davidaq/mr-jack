@@ -20,11 +20,11 @@ export class TutorSetup extends GameSetup {
         const { Sea: S, OpenSpace: O } = Terain;
         state.board.terain = [
             S, O, O, S, S, S, S, S,
-            S, S, O, S, O, S, S, S,
-            S, O, O, O, O, S, S, S,
+            S, S, O, O, O, S, O, S,
+            S, O, O, O, O, O, O, S,
+            O, O, O, O, O, O, O, O,
             O, O, O, O, O, O, O, S,
-            O, O, O, O, O, O, O, S,
-            S, O, O, O, O, S, S, S,
+            S, O, O, O, O, O, S, S,
             S, S, S, S, O, O, O, O,
             S, S, S, S, S, S, O, S,
         ];
