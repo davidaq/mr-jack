@@ -11,7 +11,7 @@ const defaultOptions = () => ({
 
 const requestAnimationFrame = window.requestAnimationFrame || window.webkitRequestAnimationFrame || (fn => setTimeout(fn, 30));
 
-const now = () => performance.now ? performance.now() : performance.webkitNow ? performance.webkitNow() : Date.now();
+window.now = () => performance.now ? performance.now() : performance.webkitNow ? performance.webkitNow() : Date.now();
 
 class Engine {
     constructor () {
