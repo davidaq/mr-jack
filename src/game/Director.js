@@ -34,8 +34,7 @@ class Director {
         this.board = new Board(this);
         this.root.addChild(this.board);
 
-        this.hud = new Hud(this);
-        this.root.addChild(this.hud);
+        this.root.addChild(new Hud(this));
 
         const fader = new Rect(window.innerWidth, window.innerHeight);
         this.root.addChild(fader);
