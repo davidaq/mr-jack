@@ -1,19 +1,15 @@
 
 class BoardDraging {
-    constructor () {
+    constructor (boardActor) {
+        this.boardActor = boardActor;
+
         this.touchstart = this.touchstart.bind(this);
         this.touchend = this.touchend.bind(this);
         this.touchmove = this.touchmove.bind(this);
     }
-    install (presentor) {
-        this.boardState = presentor.gameState.board;
-        this.boardActor = presentor.board;
-
-        this.boardPresentWidth = this.boardState.width * 60;
-        this.boardPresentHeight = this.boardState.height * 70 + 35;
-
-        this.boardActor.x = (window.innerWidth - this.boardPresentWidth) / 2;
-        this.boardActor.y = (window.innerHeight - this.boardPresentHeight) / 2;
+    onInstall () {
+        this.boardActor.x = (window.innerWidth - this.boardActor.boardPresentWidth) / 2;
+        this.boardActor.y = (window.innerHeight - this.boardActor.boardPresentHeight) / 2;
 
         this.boardDrag = false;
 
@@ -71,13 +67,13 @@ class BoardDraging {
                 adjustY += vy * 0.3;
             }
 
-            if (adjustX + this.boardPresentWidth < window.innerWidth / 2) {
-                adjustX = window.innerWidth / 2 - this.boardPresentWidth;
+            if (adjustX + this.boardActor.boardPresentWidth < window.innerWidth / 2) {
+                adjustX = window.innerWidth / 2 - this.boardActor.boardPresentWidth;
             } else if (adjustX > window.innerWidth / 2) {
                 adjustX = window.innerWidth / 2;
             }
-            if (adjustY + this.boardPresentHeight < window.innerHeight / 2) {
-                adjustY = window.innerHeight / 2 - this.boardPresentHeight;
+            if (adjustY + this.boardActor.boardPresentHeight < window.innerHeight / 2) {
+                adjustY = window.innerHeight / 2 - this.boardActor.boardPresentHeight;
             } else if (adjustY > window.innerHeight / 2) {
                 adjustY = window.innerHeight / 2;
             }

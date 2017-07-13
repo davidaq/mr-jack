@@ -1,18 +1,20 @@
 import { Container, Graphics, Sprite } from 'pixi.js';
 import { Terain } from '@/game/constants';
+import Rect from './Rect';
+import BoardDraging from '@/game/behaviours/BoardDraging';
 import seaTexture from '@/assets/white-hex.png';
 
 class Board extends Container {
-    constructor (presentor) {
+    constructor (director) {
         super();
-        const { gameState, loader } = presentor;
+        const { gameState, loader } = director;
         this.interactive = true;
-        const bgSprite = new Graphics();
-        bgSprite.beginFill(0xFF00);
-        bgSprite.alpha = 0;
-        const boardPresentWidth = gameState.board.width * 60;
-        const boardPresentHeight = gameState.board.height * 70 + 35;
-        bgSprite.drawRect(-boardPresentWidth / 2, -boardPresentHeight / 2, boardPresentWidth * 2, boardPresentHeight * 2);
+        this.boardPresentWidth = gameState.board.width * 60;
+        this.boardPresentHeight = gameState.board.height * 70 + 35;
+        const bgSprite = new Rect(this.boardPresentWidth * 3, this.boardPresentHeight * 3, 0x25);
+        bgSprite.alpha = 1;
+        bgSprite.x = -this.boardPresentWidth;
+        bgSprite.y = -this.boardPresentHeight;
         this.addChild(bgSprite);
         gameState.board.terain.forEach((v, index) => {
             let hex;
@@ -30,6 +32,8 @@ class Board extends Container {
                 this.addChild(hex);
             }
         });
+
+        director.installBehaviour(new BoardDraging(this));
     }
 }
 

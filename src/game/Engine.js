@@ -1,6 +1,6 @@
 import { Application, autoDetectRenderer } from 'pixi.js';
 import State from './State';
-import Presentor from './Presentor';
+import Director from './Director';
 import * as GameSetup from './GameSetup';
 
 const defaultOptions = () => ({
@@ -24,7 +24,7 @@ class Engine {
         options = Object.assign(defaultOptions(), options);
         this.options = options;
         this.state = new State(this.options.setup());
-        this.presentor = new Presentor(this.state);
+        this.director = new Director(this.state);
 
         this.renderer = autoDetectRenderer(100, 100, 
             { antialias: true, transparent: false, resolution: 1 });
@@ -38,7 +38,7 @@ class Engine {
         this.options.$el.appendChild(this.renderer.view);
         window.addEventListener('resize', this.adjustSize);
         
-        this.presentor.load(() => {
+        this.director.load(() => {
             this.prevFrameTime = now();
             requestAnimationFrame(this.play);
         });
@@ -51,8 +51,8 @@ class Engine {
             return;
         }
         const curTime = now();
-        this.presentor.update((curTime - this.prevFrameTime) / 1000);
-        this.renderer.render(this.presentor.root);
+        this.director.update((curTime - this.prevFrameTime) / 1000);
+        this.renderer.render(this.director.root);
         this.prevFrameTime = curTime;
         requestAnimationFrame(this.play);
     }

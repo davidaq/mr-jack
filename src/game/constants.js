@@ -1,7 +1,14 @@
 
-// 任务类型
-export const NPC = {
-
+// 可控人物类型
+export const Characters = {
+    lamp          : 0,
+    house         : 1,
+    swap          : 2,
+    control       : 3,
+    ship          : 4,
+    block         : 5,
+    park          : 6,
+    portal        : 7,
 };
 
 // 地形类型
