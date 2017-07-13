@@ -26,7 +26,7 @@ class Engine {
         this.state = new State(this.options.setup());
         this.director = new Director(this.state);
 
-        this.renderer = autoDetectRenderer(100, 100, 
+        this.renderer = autoDetectRenderer(100, 100,
             { antialias: true, transparent: false, resolution: 1 });
         Object.assign(this.renderer.view.style, {
             width: '100%',
@@ -37,7 +37,7 @@ class Engine {
         this.adjustSize();
         this.options.$el.appendChild(this.renderer.view);
         window.addEventListener('resize', this.adjustSize);
-        
+
         this.director.load(() => {
             this.prevFrameTime = now();
             requestAnimationFrame(this.play);
@@ -58,6 +58,7 @@ class Engine {
     }
     destroy () {
         this.stoped = true;
+        this.director.destroy();
         window.removeEventListener('resize', this.adjustSize);
     }
 }

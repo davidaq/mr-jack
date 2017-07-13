@@ -68,6 +68,9 @@ class Director {
     update (elapse) {
         this.behaviours.forEach(item => item.update(elapse));
     }
+    destroy () {
+        this.gameState.destroy();
+    }
 }
 
 export default Director;

@@ -6,7 +6,24 @@ class State {
         this.setup = setup;
         this.npc = {};
         this.board = new BoardState(setup.width, setup.height);
+        this.currentRound = 1;
+        this.totalRound = 8;
         setup.initialize(this);
+        this.tick = setInterval(() => {
+            this.currentRound++;
+            if (this.currentRound > this.totalRound) {
+                this.currentRound = 1;
+            }
+        }, 1000);
+    }
+    destroy () {
+        clearInterval(this.tick);
+    }
+    get isDetectiveFirst () {
+        return this.currentRound % 2 == 1;
+    }
+    get isWitnessOpen () {
+        return !this.isDetectiveFirst;
     }
     moveNpc (npc, to) {
     }

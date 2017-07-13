@@ -1,18 +1,19 @@
 import { Container, Sprite } from 'pixi.js';
 import Rect from './Rect';
-import p1Texture from '@/assets/logo.png';
 
 class Card extends Container {
     constructor (director, options) {
         super();
-        const bg = new Rect(90, 120, 0xffffff);
+        const bg = new Sprite(director.texture("cardBg"));
+        bg.width = 90;
+        bg.height = 120;
         this.addChild(bg);
 
-        const portait = new Sprite(director.loader.resources[p1Texture].texture);
-        portait.width = 80;
-        portait.height = 80;
-        portait.x = 5;
-        portait.y = 5;
+        const portait = new Sprite(director.texture("hourglass"));
+        portait.width = 60;
+        portait.height = 60;
+        portait.x = 15;
+        portait.y = 15;
         this.addChild(portait);
     }
 }
