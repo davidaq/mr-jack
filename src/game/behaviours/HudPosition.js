@@ -26,7 +26,9 @@ class HudPosition {
             this.bottomHud.x = 0;
             this.bottomHud.y = this.ch - this.bottomHud.h * scale;
             this.topHud.scale = new Point(scale, scale);
+            this.topHud.moveOrderContainer.x = 250;
         } else {
+            this.topHud.moveOrderContainer.x = this.cw - 160;
             this.bottomHud.scale = new Point(1, 1);
             this.bottomHud.x = (this.cw - this.bottomHud.w) / 2;
             this.bottomHud.y = this.ch - this.bottomHud.h - 30;

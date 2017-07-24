@@ -19,15 +19,18 @@ class BottomHud extends Container {
         this.addChild(hourglass);
 
         this.moveOrder = [];
+        this.moveOrderContainer = new Container();
+        this.moveOrderContainer.x = 250;
+        this.addChild(this.moveOrderContainer);
         for (let i = 0; i < 4; i++) {
             const isDetective = i === 0 || i === 3;
             const texture = isDetective ? director.texture('detective') : director.texture('criminal');
             const dorc = new Sprite(texture);
             dorc.isDetective = isDetective;
-            dorc.x = 250 + i * 38;
+            dorc.x = i * 38;
             dorc.y = 8;
             this.moveOrder.push(dorc);
-            this.addChild(dorc);
+            this.moveOrderContainer.addChild(dorc);
         }
 
         this.witnessOpen = new Sprite(director.texture('witnessOpen'));
@@ -70,7 +73,7 @@ class BottomHud extends Container {
         this.moveOrder[2] = this.moveOrder[3];
         this.moveOrder[3] = t;
         this.moveOrder.forEach((dorc, i) => {
-            dorc.x = 250 + i * 38;
+            dorc.x = i * 38;
         });
     }
     setWitnessOpen (isOpen = true) {
