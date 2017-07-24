@@ -18,6 +18,13 @@ export class TutorSetup {
             S, S, S, S, O, O, O, O,
             S, S, S, S, S, S, O, S,
         ];
+        setTimeout(() => {
+            state.statusText = 'hello!';
+        }, 2000);
+    }
+
+    destroy () {
+
     }
 }
 

@@ -9,7 +9,11 @@ class RootState {
         this.currentRound = 1;
         this.totalRound = 8;
         this.statusText = '';
+        this.setup = setup;
         setup.initialize(this);
+    }
+    destory () {
+        this.setup.destory(this);
     }
     get isDetectiveFirst () {
         return this.currentRound % 2 == 1;
