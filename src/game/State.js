@@ -8,12 +8,14 @@ class State {
         this.board = new BoardState(setup.width, setup.height);
         this.currentRound = 1;
         this.totalRound = 8;
+        this.statusText = '';
         setup.initialize(this);
         this.tick = setInterval(() => {
             this.currentRound++;
             if (this.currentRound > this.totalRound) {
                 this.currentRound = 1;
             }
+            this.statusText = ['Hello', 'Hey!', '哈喽'][this.currentRound % 3];
         }, 1000);
     }
     destroy () {

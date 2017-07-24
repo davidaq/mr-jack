@@ -2,6 +2,8 @@ import { Container, Sprite, Text } from 'pixi.js';
 import Rect from './Rect';
 import Card from './Card';
 import StateWatcher from '@/game/behaviours/StateWatcher';
+import OpacityFadeOut from '@/game/behaviours/OpacityFadeOut';
+import OpacityFadeIn from '@/game/behaviours/OpacityFadeIn';
 
 class BottomHud extends Container {
     constructor (director) {
@@ -16,19 +18,28 @@ class BottomHud extends Container {
 
         this.cards = [];
         this.setCards([2,3,1,4]);
+
+        this.statusText = null;
+
+        director.installBehaviour(new StateWatcher(
+            state => [state.statusText],
+            this.setStatusText.bind(this)
+        ));
     }
-    setRound (current, total, isDetectiveFirst, isWitnessOpen) {
-        if (this.roundText) {
-            this.removeChild(this.roundText);
+    setStatusText (text) {
+        if (this.statusText) {
+            this.director.installBehaviour(new OpacityFadeOut(this.statusText, 0.3, true));
+            this.statusText = null;
         }
-        this.roundText = new Text(`${current}/${total}`, {
-            fill: 0xffffff,
-        });
-        this.roundText.x = 50;
-        this.roundText.y = 7;
-        this.addChild(this.roundText);
-        this.setDetectiveFirst(isDetectiveFirst);
-        this.setWitnessOpen(isWitnessOpen);
+        if (text) {
+            this.statusText = new Text(text, {
+                fill: 0xffffff,
+            });
+            this.statusText.x = 8;
+            this.statusText.y = 8;
+            this.director.installBehaviour(new OpacityFadeIn(this.statusText, 0.3));
+            this.addChild(this.statusText);
+        }
     }
     setCards (cards) {
         this.cards.forEach(card => this.removeChild(card));
@@ -38,27 +49,6 @@ class BottomHud extends Container {
             card.y = 52;
             this.addChild(card);
         });
-    }
-    setDetectiveFirst (isDetectiveFirst = true) {
-        if (this.moveOrder[0].isDetective === isDetectiveFirst) {
-            return;
-        }
-        let t = this.moveOrder[0];
-        this.moveOrder[0] = this.moveOrder[1];
-        this.moveOrder[1] = t;
-        t = this.moveOrder[2];
-        this.moveOrder[2] = this.moveOrder[3];
-        this.moveOrder[3] = t;
-        this.moveOrder.forEach((dorc, i) => {
-            dorc.x = 250 + i * 38;
-        });
-    }
-    setWitnessOpen (isOpen = true) {
-        if (this.witnessOpen.visible === isOpen) {
-            return;
-        }
-        this.witnessOpen.visible = isOpen;
-        this.witnessClose.visible = !isOpen;
     }
 }
 
