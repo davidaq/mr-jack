@@ -1,4 +1,4 @@
-import { Terain, TerainPassable, Accessible, Unstopable, Unpassable } from './constants';
+import { Terain, TerainPassable, Accessible, Unstopable, Unpassable } from '../constants';
 
 class BoardState {
     constructor (width, height) {

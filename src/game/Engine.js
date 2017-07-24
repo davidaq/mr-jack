@@ -1,12 +1,12 @@
 import { Application, autoDetectRenderer } from 'pixi.js';
-import State from './State';
+import RootState from './state/RootState';
 import Director from './Director';
-import * as GameSetup from './GameSetup';
+import TutorSetup from './setups/TutorSetup';
 
 const defaultOptions = () => ({
     $el: document.body,
     mode: 'tutor',
-    setup: () => new GameSetup.TutorSetup(),
+    setup: () => new TutorSetup(),
 });
 
 const requestAnimationFrame = window.requestAnimationFrame || window.webkitRequestAnimationFrame || (fn => setTimeout(fn, 30));
@@ -23,7 +23,7 @@ class Engine {
     begin (options) {
         options = Object.assign(defaultOptions(), options);
         this.options = options;
-        this.state = new State(this.options.setup());
+        this.state = new RootState(this.options.setup());
         this.director = new Director(this.state);
 
         this.renderer = autoDetectRenderer(100, 100,

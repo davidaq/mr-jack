@@ -1,19 +1,9 @@
-import { Terain } from './constants';
+import { Terain } from '../constants';
 
-class GameSetup {
-    constructor (width, height) {
-        this.width = width;
-        this.height = height;
-    }
-
-    initialize () {}
-}
-
-export default GameSetup;
-
-export class TutorSetup extends GameSetup {
+export class TutorSetup {
     constructor () {
-        super(8, 8);
+        this.width = 8;
+        this.height = 8;
     }
 
     initialize (state) {
@@ -30,3 +20,5 @@ export class TutorSetup extends GameSetup {
         ];
     }
 }
+
+export default TutorSetup;
