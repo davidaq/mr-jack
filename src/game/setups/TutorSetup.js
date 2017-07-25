@@ -30,10 +30,18 @@ export class TutorSetup {
         state.myRole = Role.Jack;
         await sleep(3);
         state.alertText = [
-            '您将首先扮演杰克玩家\n目标是在有限的回合内\n将自己移动到地图的出口',
-            '每局游戏中，场上会出现若干角色\n其中一个角色的隐藏身份是杰克',
+            '您将首先扮演杰克玩家\n目标是将自己移动到地图的出口',
+            '每局游戏中，场上会出现若干人物\n其中一个就是隐藏身份的杰克',
         ];
         await until(() => !state.alertText);
+        // put characters
+        // set jack character
+        await sleep(3);
+        state.alertText = [
+            '您可以通过卡片让人物移动或使用技能',
+        ];
+        await until(() => !state.alertText);
+        state.statusText = '请选择第二角色';
     }
 
     destroy () {
@@ -42,48 +50,3 @@ export class TutorSetup {
 }
 
 export default TutorSetup;
-
-const t = [], m = [];
-function S_(a1, a2, k1, k2) {
-    if (a1.length <= k1 || a2.length <= k2) {
-        return 0;
-    }
-    if (a1[k1] === a2[k2]) {
-        m[this] = { n: K(a1, a2, k1 + 1, k2 + 2), v: a1[k1], k: k1 };
-        return S(a1, a2, k1 + 1, k2 + 1) + 1;
-    } else {
-        const v1 = S(a1, a2, k1, k2 + 1);
-        const v2 = S(a1, a2, k1 + 1, k2);
-        if (v1 > v2) {
-            m[this] = { n: K(a1, a2, k1, k2 + 1) };
-            return v1;
-        } else {
-            m[this] = { n: K(a1, a2, k1 + 1, k2) };
-            return v2;
-        }
-    }
-}
-
-function K(a1, a2, k1, k2) {
-    return k1 * 100 + k2;
-}
-
-function S (...args) {
-    const k = K(...args);
-    if (!t[k]) {
-        t[k] = S_.call(k, ...args);
-    }
-    return t[k];
-}
-
-console.log(S([6, 7, 9, 8, 3, 6, 5], [7, 6, 9, 8, 3, 1, 5], 0, 0));
-let p = 0;
-while (true) {
-    if (!m[p]) break;
-    if ('v' in m[p]) {
-        console.log(m[p].v, m[p].k);
-    }
-    p = m[p].n;
-}
-console.log(m);
-
