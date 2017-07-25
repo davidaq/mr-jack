@@ -9,6 +9,8 @@ class RootState {
         this.currentRound = 1;
         this.totalRound = 8;
         this.statusText = '';
+        this.alertText = '';
+        this.myRole = 0;
         this.setup = setup;
         setup.initialize(this);
     }

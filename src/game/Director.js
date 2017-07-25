@@ -1,8 +1,5 @@
 import { Container, loaders } from 'pixi.js';
-import Board from './actors/Board';
-import Rect from './actors/Rect';
-import Hud from './actors/Hud';
-import OpacityFadeOut from './behaviours/OpacityFadeOut';
+import Root from './actors/Root';
 
 import seaTexture from '@/assets/white-hex.png';
 import p1Texture from '@/assets/logo.png';
@@ -21,24 +18,12 @@ class Director {
             this.loader.add(textureName, textures[textureName]);
         });
         this.loader.load(() => {
-            this.setupScene();
+            this.root = new Root(this);
             callback();
         });
     }
     texture (name) {
         return this.loader.resources[name].texture;
-    }
-    setupScene () {
-        this.root = new Container();
-
-        this.board = new Board(this);
-        this.root.addChild(this.board);
-
-        this.root.addChild(new Hud(this));
-
-        const fader = new Rect(window.innerWidth, window.innerHeight);
-        this.root.addChild(fader);
-        this.installBehaviour(new OpacityFadeOut(fader, 0.5, true));
     }
     installBehaviour (behaviour) {
         if (behaviour.isInstalled) {

@@ -13,13 +13,10 @@ class BoardDraging {
 
         this.boardDrag = false;
 
-        this.boardActor.touchstart = this.touchstart;
-        this.boardActor.touchmove = this.touchmove;
-        this.boardActor.touchend = this.touchend;
-
-        this.boardActor.mousedown = this.touchstart;
-        this.boardActor.mousemove = this.touchmove;
-        this.boardActor.mouseup = this.touchend;
+        this.boardActor.pointerdown = this.touchstart;
+        this.boardActor.pointermove = this.touchmove;
+        this.boardActor.pointerup = this.touchend;
+        this.boardActor.pointerupoutside = this.touchend;
 
         this.drags = [];
     }

@@ -20,7 +20,7 @@ class StateWatcher {
                 }
             }
             if (changed) {
-                this.cb(...values);
+                this.cb(...values, this);
                 this.cached = values;
             }
         }

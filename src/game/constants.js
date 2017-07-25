@@ -22,6 +22,11 @@ export const Terain = {
     RoadBlock     : 6,
 };
 
+export const Role = {
+    Jack        : 1,
+    Detective   : 2,
+};
+
 // 地形可通过性
 export const Unpassable = 0;      // 不可通过
 export const Unstopable = 1;      // 不可停留

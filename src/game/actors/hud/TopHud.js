@@ -1,5 +1,5 @@
 import { Container, Sprite, Text } from 'pixi.js';
-import Rect from './Rect';
+import Rect from '../Rect';
 import StateWatcher from '@/game/behaviours/StateWatcher';
 
 class BottomHud extends Container {
@@ -43,22 +43,19 @@ class BottomHud extends Container {
         this.addChild(this.witnessClose);
         this.witnessClose.visible = false;
 
-        this.roundText = null;
+        this.roundText = new Text('', {
+            fill: 0xffffff,
+        });
+        this.roundText.x = 50;
+        this.roundText.y = 7;
+        this.addChild(this.roundText);
         director.installBehaviour(new StateWatcher(
             state => [state.currentRound, state.totalRound, state.isDetectiveFirst, state.isWitnessOpen],
             this.setRound.bind(this)
         ));
     }
     setRound (current, total, isDetectiveFirst, isWitnessOpen) {
-        if (this.roundText) {
-            this.removeChild(this.roundText);
-        }
-        this.roundText = new Text(`${current}/${total}`, {
-            fill: 0xffffff,
-        });
-        this.roundText.x = 50;
-        this.roundText.y = 7;
-        this.addChild(this.roundText);
+        this.roundText.text = `${current}/${total}`;
         this.setDetectiveFirst(isDetectiveFirst);
         this.setWitnessOpen(isWitnessOpen);
     }

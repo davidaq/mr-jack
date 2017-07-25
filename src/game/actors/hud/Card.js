@@ -1,5 +1,5 @@
 import { Container, Sprite } from 'pixi.js';
-import Rect from './Rect';
+import Rect from '../Rect';
 
 class Card extends Container {
     constructor (director, options) {

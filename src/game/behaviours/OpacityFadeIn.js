@@ -13,6 +13,7 @@ class OpacityFadeIn {
         this.elapsed += elapsed;
         if (this.elapsed >= this.duration) {
             this.actor.alpha = 1;
+            this.uninstall();
         } else {
             this.actor.alpha = this.elapsed / this.duration;
         }
